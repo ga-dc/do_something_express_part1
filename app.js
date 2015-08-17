@@ -36,26 +36,81 @@ var tasks = [
     "completed": false
   }
 ]
+var lists = [
+  {
+    "name": "WDI",
+    "todos": [1]
+  },
+  {
+    "name": "Self",
+    "todos": [2, 3, 5]
+  },
+  {
+    "name": "Errands",
+    "todos": [4]
+  }
+]
 
 
 app.get("/", function(req,res){
   res.json(tasks)
 })
 
-app.get("/:id", function(req, res){
+app.get("/tasks", function(req, res){
+  res.json(tasks)
+})
+
+app.get("/tasks/:id", function(req, res){
   var todo = parseInt(req.params.id) - 1
   res.json(tasks[todo])
 })
 
-app.post("/", function(req, res){
+app.post("/tasks", function(req, res){
   tasks.push(req.body)
+  res.json(tasks)
 })
 
-app.put("/:id", function(req, res) {
+app.put("/tasks/:id", function(req, res) {
   var todo = parseInt(req.params.id) - 1
   tasks[todo]["completed"] = req.body.completed
   res.json(tasks)
 })
+
+app.delete("/tasks/:id", function(req, res) {
+  var todo = parseInt(req.params.id) - 1
+  tasks.splice(todo, 1);
+  res.json(tasks)
+})
+
+///////////////////////////////////////////
+
+app.get("/lists", function(req, res){
+  res.json(lists)
+})
+
+app.get("/lists/:id", function(req, res){
+  var list_number = parseInt(req.params.id) - 1
+  res.json(lists[list_number])
+})
+
+app.post("/lists", function(req, res){
+  lists.push(req.body)
+  res.json(lists)
+})
+
+app.put("/lists/:id", function(req, res) {
+  var list_number = parseInt(req.params.id) - 1
+  lists[list_number]["todos"].push(req.body.todo)
+  res.json(lists)
+})
+
+app.delete("/lists/:id", function(req, res) {
+  var list_number = parseInt(req.params.id) - 1
+  lists.splice(list_number, 1);
+  res.json(lists)
+})
+
+//////////////////////////////////////////
 
 
 app.listen(3000, function(){
