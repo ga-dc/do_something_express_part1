@@ -18,5 +18,12 @@ var tasks = [
 
 // root returns JSON file with all tasks
 app.get('/', function(req, res) {
-  res.json(tasks)
+  res.json(tasks);
+});
+
+// show a single item on to-do list
+app.get('/:id', function(req, res) {
+  // should this be converted to int?
+  var task = req.params.id - 1
+  res.json(tasks[task]);
 });
