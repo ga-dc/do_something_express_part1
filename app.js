@@ -1,66 +1,31 @@
 var express = require('express');
+var tasks = require('./tasks');
 var app = express();
-
-
-
-/************************************************
-* Tasks: Should be exported to their own module *
-*************************************************/
-tasks = [
-  {
-    id: 0,
-    body: "Do better",
-    completed: false
-  },
-  {
-    id: 1,
-    body: "Be better",
-    completed: false
-  },
-  {
-    id: 2,
-    body: "Read",
-    completed: false
-  },
-  {
-    id: 3,
-    body: "Write",
-    completed: false
-  },
-  {
-    id: 4,
-    body: "Meditate",
-    completed: false
-  }
-];
-//Tasks End
-
-
-
-/*********
-* Routes *
-**********/
 
 // index
 app.get('/', function(req, res){
-  res.json(tasks);
+  res.json(tasks.tasks);
 });
 
 // get specific task
 app.get('/:id', function(req, res){
-  res.json(tasks[req.params.id]);
+  res.json(tasks.tasks[req.params.id]);
+});
+
+// update to completed
+app.put('/:id', function(req, res){
+  tasks.tasks[req.params.id].completed = true;
+  res.json(tasks.tasks[req.params.id]);
 });
 
 // post new todo
 app.post('/:task', function(req, res){
 
-  var newTask = tasks.push(
-    {
-      id: tasks.length,
-      body: req.params.task,
-      completed: false
-    }
-  );
+  var newTask = tasks.tasks.push({
+    id: tasks.tasks.length,
+    body: req.params.task,
+    completed: false
+  });
 
   res.json(newTask);
 });
