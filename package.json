@@ -1,0 +1,28 @@
+{
+  "name": "do_something_express_part1",
+  "version": "1.0.0",
+  "description": "pt.1 of hw",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ga-dc/do_something_express_part1.git"
+  },
+  "keywords": [
+    "hw"
+  ],
+  "author": "rosel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ga-dc/do_something_express_part1/issues"
+  },
+  "homepage": "https://github.com/ga-dc/do_something_express_part1#readme",
+  "dependencies": {
+    "body-parser": "^1.13.3",
+    "express": "^4.13.3",
+    "jshint": "^2.8.0",
+    "nodemon": "^1.4.1"
+  }
+}
