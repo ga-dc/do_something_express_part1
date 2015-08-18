@@ -47,11 +47,11 @@ app.post('/:id', function(req, res) {
   tasks[task].items.push({id: tasks[task].items.length + 1, body: req.body.body, completed: req.body.completed == "true"});
 });
 
-
 // update the completion status of an item
-app.put('/:id', function(req, res) {
+app.put('/:id/:item_id', function(req, res) {
   // get index value of item by id
   var task = req.params.id - 1;
+  var item = req.params.item_id - 1;
   // change completion status, convert to boolean
-  tasks[task].completed = req.body.completed == "true"
+  tasks[task].items[item].completed = req.body.completed == "true"
 });
