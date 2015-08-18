@@ -1,5 +1,13 @@
 var express = require("express")
-var app = express();
+var bodyParser = require("body-parser")
+var app = express()
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: true}))
+
+// Use port 4000 to run application.
+app.listen(4000, function(){
+  console.log("app listening on port 4000")
+});
 
 // Specify the "/".
 // app.get("/", function(req, res){
@@ -56,9 +64,4 @@ app.get("/tasks/:id", function(req, res){
 app.post("/tasks", function(req,res){
   tasks.push(req.body)
   res.json(req.body)
-})
-
-// Use port 4000 to run application.
-app.listen(4000, function(){
-  console.log("app listening on port 4000")
 });
