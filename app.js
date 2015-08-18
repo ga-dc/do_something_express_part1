@@ -5,18 +5,14 @@ var routes = require("./routes.js")
 app.set('view engine', 'hbs')
 app.use(express.static(__dirname + '/public'))
 
-var hbs = require("hbs")
-var tasks = [ {id: 1, body: 'toDo1', completed: false},
-              {id: 2, body: 'toDo2', completed: true},
-              {id: 3, body: 'toDo3', completed: false},
-              {id: 4, body: 'toDo4', completed: true},
-              {id: 5, body: 'toDo5', completed: false}, ]
-
-// app.get('/', routes.index)
+var hbs = require("hbs");
 
 app.get('/', function(req, res) {
-  res.json(tasks)
+  res.redirect('/tasks')
 })
+
+app.get('/tasks', routes.index)
+  // res.json(tasks))
 
 app.get("/tasks/:id", function(req, res){
   for(var i = 0; i < tasks.length; i++){
@@ -30,6 +26,7 @@ app.post("/tasks", function(req,res){
   tasks.push(req.body)
   res.json(req.body)
 
+})
 // app.post('/', )
 
 // app.get('/todo/:id', routes.show)
