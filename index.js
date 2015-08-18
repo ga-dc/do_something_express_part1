@@ -21,12 +21,12 @@ var tasks = [
   }
 ];
 
-// root returns JSON file with all tasks
+// root returns JSON file with all to-do lists
 app.get('/', function(req, res) {
   res.json(tasks);
 });
 
-// show a single item on to-do list
+// show a single to-do list
 app.get('/:id', function(req, res) {
   // FIXME should req.params.id be converted to int?
   // get index value of item by id
@@ -34,11 +34,18 @@ app.get('/:id', function(req, res) {
   res.json(tasks[task].items);
 });
 
-// add an item to the 'tasks' array
+// add a list to the 'tasks' array
 app.post('/', function(req, res) {
+  // convert id to int, completed to boolean
+  tasks.push({id: tasks.length + 1, name: req.body.name, items: []});
+});
+
+app.post('/:id', function(req, res) {
+  var task = req.params.id - 1;
   // convert id to int, completed to boolean
   tasks.push({id: parseInt(req.body.id), body: req.body.body, completed: req.body.completed == "true"});
 });
+
 
 // update the completion status of an item
 app.put('/:id', function(req, res) {
