@@ -1,11 +1,13 @@
 var express = require('express'),
   app = exports.app = express();
 var routes = require("./routes.js")
+var bodyParser = require("body-parser")
+var hbs = require("hbs");
 
 app.set('view engine', 'hbs')
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(__dirname + '/public'))
-
-var hbs = require("hbs");
 
 app.get('/', function(req, res) {
   res.redirect('/tasks')
@@ -22,14 +24,15 @@ app.get("/tasks/:id", function(req, res){
   }
 })
 
+
 app.post("/tasks", function(req,res){
+  res.send(req.params.id + req.params.body + req.params.complete)
   tasks.push(req.body)
   res.json(req.body)
 
 })
-// app.post('/', )
 
-// app.get('/todo/:id', routes.show)
+// app.get('/tasks/:id', routes.show)
 
 app.listen(3000, function(){
   console.log("app listening on port 3000");

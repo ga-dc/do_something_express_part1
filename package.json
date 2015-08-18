@@ -4,6 +4,7 @@
   "description": "This week, we'll be working on a to-do based application called do something!",
   "main": "app.js",
   "dependencies": {
+    "body-parser": "^1.13.3",
     "express": "^4.13.3",
     "hbs": "^3.1.0"
   },
