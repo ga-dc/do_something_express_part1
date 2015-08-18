@@ -1,0 +1,11 @@
+New toDo
+<form action="/" method="post">
+  <input type='text' name='id'>
+  <input type="text" name="name">
+  <input type='text' name='complete'>
+</form>
+<ul>
+  {{#each tasks}}
+    <li><a href='/tasks/{{id}}'>{{id}}. {{body}} {{complete}}</a></li>
+  {{/each}}
+</ul>
