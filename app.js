@@ -1,21 +1,29 @@
+// ======= housekeeping
 var express = require('express');
 var app = express();
+var bodyParser = require("body-parser")
+app.use(bodyParser.json()) //handles json post requests
+app.use(bodyParser.urlencoded({ extended: true })) // handles form submissions
 
+// ======= view engine set to hbs
+app.set("view engine", "hbs")
+
+// ======= objects
 var object1 = {
 	id: 1,
-	body: "object1",
+	body: "index task",
 	completed: true
 }
 
 var object2 = {
 	id: 2,
-	body: "object2",
+	body: "post task",
 	completed: true
 }
 
 var object3 = {
 	id: 3,
-	body: "object3",
+	body: "edit task",
 	completed: true
 }
 
@@ -33,7 +41,29 @@ var object5 = {
 
 var tasks = [object1, object2, object3, object4, object5];
 
-// ======= INDEX route (request and response)
+// ======= get route EDIT
+app.get('/edit/2', function (req, res) {
+
+	var editTask = tasks[2];
+
+	res.contentType('application/json');
+	res.send(JSON.stringify(editTask));
+
+});
+
+
+// ======= POST route
+app.post('/', function (req, res) {
+
+	tasks.push(params);
+
+	res.contentType('application/json');
+	res.send(JSON.stringify(tasks));
+
+});
+
+
+// ======= SHOW route
 app.get('/show/1', function (req, res) {
 
 	var showTask = tasks[1];
@@ -44,8 +74,7 @@ app.get('/show/1', function (req, res) {
 });
 
 
-
-// ======= INDEX route (request and response)
+// ======= INDEX route
 app.get('/', function (req, res) {
 
 	res.contentType('application/json');
