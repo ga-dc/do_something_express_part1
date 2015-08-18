@@ -2,9 +2,9 @@ var express = require("express")
 var app = express();
 
 // Specify the "/".
-app.get("/", function(req, res){
-  res.send("Hello World! So sweet.")
-});
+// app.get("/", function(req, res){
+//   res.send("Hello World! So sweet.")
+// });
 
 // Create a varable with 5 object in an array.
 var tasks = [{
@@ -51,6 +51,12 @@ app.get("/tasks/:id", function(req, res){
       res.json(tasks[i])
     };
 });
+
+// Create a post route that allows you to add an object to the array.
+app.post("/tasks", function(req,res){
+  tasks.push(req.body)
+  res.json(req.body)
+})
 
 // Use port 4000 to run application.
 app.listen(4000, function(){
