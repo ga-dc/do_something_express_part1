@@ -1,6 +1,8 @@
 var express = require("express")
 var app = express()
 
+/////////////////////////////////////////////
+
 // tasks objects
 
 var tasks = [{
@@ -25,6 +27,12 @@ var tasks = [{
     completed: true
 }]
 
+/////////////////////////////////////////////
+
+app.get("/", function(req, res) {
+    res.redirect("/tasks")
+})
+
 // index route
 
 app.get("/tasks", function(req, res) {
@@ -47,6 +55,23 @@ app.post("/tasks", function(req, res) {
     tasks.push(req.body)
     res.json(req.body)
 })
+
+// Bonus
+
+// update to to completed
+// not working or complete
+
+app.post("/tasks/:id", function(req, res) {
+    for (var i = 0; i < tasks.length; i++) {
+        if (tasks[i].id == req.params.id) {
+            if (tasks.completed == false) {
+                tasks.completed = true
+            }
+        }
+    }
+})
+
+/////////////////////////////////////////////
 
 // localhost:5000
 
