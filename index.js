@@ -26,11 +26,21 @@ app.get('/', function(req, res) {
 // show a single item on to-do list
 app.get('/:id', function(req, res) {
   // FIXME should req.params.id be converted to int?
+  // get index value of item by id
   var task = req.params.id - 1;
   res.json(tasks[task]);
 });
 
+// add an item to the 'tasks' array
 app.post('/', function(req, res) {
   // convert id to int, completed to boolean
-  tasks.push({id: parseInt(req.body.id), body: req.body.body, completed: req.body.completed == "true"})
+  tasks.push({id: parseInt(req.body.id), body: req.body.body, completed: req.body.completed == "true"});
+});
+
+// update the completion status of an item
+app.put('/:id', function(req, res) {
+  // get index value of item by id
+  var task = req.params.id - 1;
+  // change completion status, convert to boolean
+  tasks[task].completed = req.body.completed == "true"
 });
