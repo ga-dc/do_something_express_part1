@@ -40,10 +40,11 @@ app.post('/', function(req, res) {
   tasks.push({id: tasks.length + 1, name: req.body.name, items: []});
 });
 
+// add an item to a list
 app.post('/:id', function(req, res) {
   var task = req.params.id - 1;
   // convert id to int, completed to boolean
-  tasks.push({id: parseInt(req.body.id), body: req.body.body, completed: req.body.completed == "true"});
+  tasks[task].items.push({id: tasks[task].items.length + 1, body: req.body.body, completed: req.body.completed == "true"});
 });
 
 
