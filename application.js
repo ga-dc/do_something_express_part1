@@ -6,7 +6,7 @@ app.use(bodyParser.json());  // for json post requests
 // app.use(bodyParser.urlencoded({extended:true}));  // for forms
 
 app.listen(3000), function(){
-  console.log("app listening on port 3000");  // could be any port, 3000-5000
+  console.log("app listening on port 3000");
 };
 
 var tasks = [
@@ -19,5 +19,16 @@ var tasks = [
 
 // tasks#index
 app.get('/', function (req, res){
-  res.send('get index');
+  res.json(tasks);
+});
+
+// tasks#show
+app.get('tasks/:id', function (req, res){
+  // var oneTask = tasks[req.params.id];  // need a variable to show only one task?
+  res.json(tasks[1]);  // will this work to show one task?
+});
+
+// tasks#create
+app.post('/tasks', function (req, res){
+  res.json({$push : {tasks: newTask}}); // will this work to add an object to an array?
 });
