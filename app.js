@@ -1,6 +1,8 @@
 var express = require("express")
 var app = express()
 
+// tasks objects
+
 var tasks = [{
     id: 1,
     body: "todo1",
@@ -23,9 +25,13 @@ var tasks = [{
     completed: true
 }]
 
+// index route
+
 app.get("/tasks", function(req, res) {
     res.json(tasks)
 })
+
+// show route
 
 app.get("/tasks/:id", function(req, res) {
     for (var i = 0; i < tasks.length; i++) {
@@ -34,6 +40,15 @@ app.get("/tasks/:id", function(req, res) {
         }
     }
 })
+
+// post route
+
+app.post("/tasks", function(req, res) {
+    tasks.push(req.body)
+    res.json(req.body)
+})
+
+// localhost:5000
 
 app.listen(5000, function() {
     console.log("app listening on port 5000")
