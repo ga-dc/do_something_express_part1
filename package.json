@@ -17,7 +17,10 @@
   },
   "homepage": "https://github.com/M00staff/do_something_express_part1#readme",
   "dependencies": {
+    "body": "^5.1.0",
+    "body-parser": "^1.13.3",
     "express": "^4.13.3",
-    "hbs": "^3.1.0"
+    "hbs": "^3.1.0",
+    "parser": "^0.1.4"
   }
 }
