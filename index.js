@@ -1,6 +1,9 @@
 var express = require('express');
 var app = exports.app = express();
 var bodyParser = require('body-parser');
+var path = require('path');
+
+app.use("/app", express.static(path.join(__dirname + "/app")))
 
 // middleware!
 app.use(bodyParser.json());
