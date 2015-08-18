@@ -13,9 +13,12 @@ app.listen(4000, function() {
 
 // create an array of objects
 var tasks = [
-  {id: 1, body: "first item", completed: false},
-  {id: 2, body: "second item", completed: false},
-  {id: 3, body: "third item", completed: false}
+  {id: 1, name: "List 1", items: [
+    {id: 1, body: "first item", completed: false},
+    {id: 2, body: "second item", completed: false},
+    {id: 3, body: "third item", completed: false}
+    ]
+  }
 ];
 
 // root returns JSON file with all tasks
@@ -28,7 +31,7 @@ app.get('/:id', function(req, res) {
   // FIXME should req.params.id be converted to int?
   // get index value of item by id
   var task = req.params.id - 1;
-  res.json(tasks[task]);
+  res.json(tasks[task].items);
 });
 
 // add an item to the 'tasks' array
