@@ -37,6 +37,12 @@ var tasks = [{
               completed: true
             }]
 
+// Create an index route that responds with a list of all of the objects.
+// Use Andy's tip about using JSON.
+app.get("/tasks", function(req, res){
+  res.json(tasks)
+})
+
 // Use port 4000 to run application.
 app.listen(4000, function(){
   console.log("app listening on port 4000")
