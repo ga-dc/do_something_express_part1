@@ -41,7 +41,16 @@ var tasks = [{
 // Use Andy's tip about using JSON.
 app.get("/tasks", function(req, res){
   res.json(tasks)
-})
+});
+
+// Create a show route that shows one single todo.
+app.get("/tasks/:id", function(req, res){
+  // Create a for loop to create a show route for EACH todo.
+  for(var i = 0; i < tasks.length; i++)
+    if (tasks[i].id == req.params.id) {
+      res.json(tasks[i])
+    };
+});
 
 // Use port 4000 to run application.
 app.listen(4000, function(){
