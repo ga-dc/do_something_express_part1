@@ -27,6 +27,12 @@ app.get("/tasks/:id", function(req, res){
   res.json("To Do: ", tasks[toDo])
 })
 
+// post
+app.post("/", function(req, res){
+  tasks.push(req.body)
+  res.json(tasks)
+})
+
 app.listen(4000, function(){
   console.log("app listening on port 4000")
 })
