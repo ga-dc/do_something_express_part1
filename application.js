@@ -16,9 +16,15 @@ var tasks = [
   {id:5, body:"Start up your by running $ nodemon application.js", completed:false }
 ];
 
-// request and response
+// index
 app.get("/", function(req, res){
   res.json(tasks)
+})
+
+// show
+app.get("/tasks/:id", function(req, res){
+  var toDo = req.params.id - 1
+  res.json("To Do: ", tasks[toDo])
 })
 
 app.listen(4000, function(){
