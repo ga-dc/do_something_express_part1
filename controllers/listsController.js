@@ -21,3 +21,4 @@ module.exports = {
     res.json(list)
   }
 }
+var lists = require("../models/seeds.js")

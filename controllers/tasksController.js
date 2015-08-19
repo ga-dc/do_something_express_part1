@@ -1,4 +1,5 @@
 module.exports = {
+
   index: function(req, res){
     res.json(tasks)
   },
@@ -23,3 +24,5 @@ module.exports = {
     res.json(task)
   }
 }
+
+var tasks = require("../models/seeds.js")
