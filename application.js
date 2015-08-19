@@ -17,6 +17,8 @@ app.get("/", function(request, response){
   response.sendFile(__dirname + "./views/index.html");
 });
 
+app.set("view engine", "hbs");
+
 app.listen(3333, function(){
   console.log("app listening on port 3333");
 });
