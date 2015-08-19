@@ -1,6 +1,11 @@
 var express = require('express');
 var app = express();
 
+var listsController = require('listsController.js');;
+var tasksController = require('tasksController.js');
+var list = require('list.js');
+var task = require('task.js');
+
 app.set("view engine", "hbs");
 
 app.listen(4000, function(){
@@ -38,8 +43,3 @@ var tasks = [
     "completed" : "false"
   }
 ];
-
-require('listsController.js');
-require('tasksController.js');
-require('list.js');
-require('task.js');
