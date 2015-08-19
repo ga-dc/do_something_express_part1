@@ -13,6 +13,23 @@ var tasks = [
   {id: 5, body:"renew the license",completed: false}
 ]
 
-app.get("/", function(req, res){
-  res.send("hello world")
+// root route
+app.get('/', function (req, res){
+  res.redirect('/tasks');
+});
+
+//index route
+app.get("/tasks", function(req, res){
+  res.json(tasks)
+})
+
+//show route
+app.get("/tasks/:id", function(req, res){
+  res.json(tasks[req.params.id - 1])
+})
+
+//post route
+app.post("/tasks", function(req, res){
+  tasks.push(req.body)
+  res.json(tasks)
 })
