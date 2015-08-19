@@ -1,4 +1,4 @@
-// Create a to-do based application 
+// Create a to-do based application
   // App setup
   var express = require("express")
   var app = express()
@@ -7,39 +7,43 @@
   app.use(bodyParser.json()) //handles json post requests
   app.use(bodyParser.urlencoded({ extended: true })) // handles form submissions
 
-  var tasks = [
-    {id: 1, body: "Write final brand statement", completed: false},
-    {id: 2, body: "Complete Resume worksheet", completed: false},
-    {id: 3, body: "Write resume rough draft", completed: false},
-    {id: 4, body: "Write resume final version", completed: false},
-    {id: 5, body: "Build portfolio", completed: false}
-  ]
+  var task = require("./models/task.js")
+  var list = require("./models/list.js")
 
-  // Root to index of tasks
+  var taskRoutes = require("./controllers/tasksController.js")
+  var listRoutes = require("./controllers/listsController.js")
+  // Root
   app.get("/", function(req, res){
     console.log("Hit root");
     res.json(tasks)
   })
-  // Index
-  app.get("/tasks", function(req, res){
-    console.log("Hit root");
-    res.json(tasks)
-  })
+
+// Tasks routes
+  // Index of Tasks
+  app.get("/tasks", taskRoutes.index)
 
   // Show one tasks
-  app.get("/tasks/:id", function(req, res){
-    var id = parseInt(req.params.id) - 1;
-    res.json(tasks[id])
-  })
+  app.get("/tasks/:id", taskRoutes.show)
 
   // Post to tasks
-  app.post("/tasks", function(req, res){
-    // var newTask = {id: 6, body: "Apply for jobs", completed: false};
-    console.log("Post request heard");
-    tasks.push(req.body)
-    res.json(req.body)
-  })
+  app.post("/tasks", taskRoutes.create)
 
+  // Update task
+  app.put("/tasks/:id", taskRoutes.update)
+
+// Lists routes
+
+  // Index of lists
+  app.get("/tasks", listRoutes.index)
+
+  // Show one lists
+  app.get("/lists/:id", listRoutes.show)
+
+  // Post to lists
+  app.post("/lists", listRoutes.create)
+
+  // Update list
+  app.put("/lists/:id", listRoutes.update)
 
   app.listen(4000, function(){
     console.log("app listening on port 4000")
