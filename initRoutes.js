@@ -17,7 +17,8 @@ function initRoutes(app, list1) {
       nextParagraph = nextParagraph + "<p>" + list1[i].id + " | " + list1[i].body + " | " + list1[i].completed + "</p></br>";
     }
     // console.log("nextParagraph: " + nextParagraph);
-    res.render("index", {para: nextParagraph});
+    // res.render("index", {para: nextParagraph});
+    // res.sendFile(__dirname + "/app/views/index.html");
   });
 
 
