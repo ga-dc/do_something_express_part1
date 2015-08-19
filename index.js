@@ -1,22 +1,22 @@
 var express = require("express")
-var app = express()
+var app = exports.app = express()
+// configure app to use body parser
+var bodyParser = require("body-parser")
+
+app.use(bodyParser.json()) //handles json post requests
+app.use(bodyParser.urlencoded({ extended: true })) // handles form submissions
+
+//add path
+var path = require("path");
+
+app.use("/app", express.static(path.join(__dirname + "/app")));
+
+//set view engine to hbs
 app.set("view engine", "hbs")
 
-app.listen(4000, function(){
-  console.log("app listening on port 4000")
-})
 
-var tasks = [
-  {id: 1, body:"buy a milk",completed: true},
-  {id: 2, body:"wash the dishes",completed: true},
-  {id: 3, body:"clean my room",completed: true},
-  {id: 4, body:"do laundry",completed: false},
-  {id: 5, body:"renew the license",completed: false}
-]
-
-// root route
-app.get('/', function (req, res){
-  res.redirect('/tasks');
+app.get("/", function(request, response){
+  response.sendFile(__dirname + "/app/views/index.html");
 });
 
 //index route
@@ -33,4 +33,8 @@ app.get("/tasks/:id", function(req, res){
 app.post("/tasks", function(req, res){
   tasks.push(req.body)
   res.json(tasks)
+})
+
+app.listen(4000, function(){
+  console.log("app listening on port 4000")
 })
