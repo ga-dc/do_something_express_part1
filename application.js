@@ -17,6 +17,15 @@ app.get("/", function(req, res){
   res.json(tasks);
 });
 
+app.get("/tasks", function(req, res){
+  res.json(tasks);
+});
+
+app.get("/tasks/:id", function(req, res){
+  res.json(tasks[req.params.id-1]);
+});
+
+
 // app.get("/tasks?", function(req, res){
 //
 // });
