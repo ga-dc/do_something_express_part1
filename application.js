@@ -36,6 +36,11 @@ app.post("/tasks", function(req,res){
   res.json(req.body);
 })
 
+app.delete("tasks/:id", function(req, res){
+  task.delete(req.params.id)
+
+})
+
 app.listen(4000, function(){
   console.log("app listening on port 4000");
 })
