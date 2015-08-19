@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/andersenek/do_something_express_part1#readme",
   "dependencies": {
-    "express": "^4.13.3"
+    "body-parser": "^1.13.3",
+    "express": "^4.13.3",
+    "hbs": "^3.1.0"
   }
 }

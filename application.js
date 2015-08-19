@@ -1,5 +1,12 @@
 var express = require("express")
 var app = express()
+var bodyParser = require("body-parser")
+
+app.use(bodyParser.json()) //handles json post requests (ajax calls)
+app.use(bodyParser.urlencoded({ extended: true })) // handles form submissions
+
+// sets view engine to hbs
+app.set("view engine", "hbs")
 
 var tasks = [
   {id:1, body:"Run $ npm init to initialize a new NodeJS application.", completed:true },
@@ -9,10 +16,11 @@ var tasks = [
   {id:5, body:"Start up your by running $ nodemon application.js", completed:false }
 ];
 
-app.listen(4000, function(){
-  console.log("app listening on port 4000")
+// request and response
+app.get("/", function(req, res){
+  res.json(tasks)
 })
 
-app.get("/", function(req, res){
-  res.send("hello world")
+app.listen(4000, function(){
+  console.log("app listening on port 4000")
 })
