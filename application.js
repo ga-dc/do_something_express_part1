@@ -6,7 +6,6 @@ app.use(bodyParser.json()) //handles json post requests
 app.use(bodyParser.urlencoded({ extended: true })) // handles form submissions
 
 
-
 var tasks = [
 { id: 1,body: "Blockbuster",completed: false },
 { id: 2,body: "Roy Rogers",completed: false },
@@ -14,6 +13,10 @@ var tasks = [
 { id: 4,body: "McDonalds",completed: false },
 { id: 5,body: "Chucky Cheese",completed: false }
 ];
+
+app.get("/", function(req, res){
+  res.sendFile(__dirname + "/app/views/index.html");
+});
 
 app.get("/", function(req,res){
   res.redirect('/tasks');
@@ -38,7 +41,6 @@ app.post("/tasks", function(req,res){
 
 app.delete("tasks/:id", function(req, res){
   task.delete(req.params.id)
-
 })
 
 app.listen(4000, function(){
