@@ -4,6 +4,9 @@ var bodyParser = require("body-parser")
 app.use(bodyParser.json()) //handles json post requests
 app.use(bodyParser.urlencoded({ extended: true })) // handles form submissions
 
+var lists_routes = require('./lists_routes');
+var tasks_routes = require('./tasks_routes')
+
 var tasks = [
   {
     "id":1,
@@ -42,11 +45,23 @@ app.get("/tasks/:id", function(req, res){
   res.json(tasks[req.params.id - 1])
 })
 
-//post
+//create
 app.post("/", function(req, res){
   tasks.push(req.body)
   res.json(tasks)
 })
+
+//update
+app.put("/", function(req, res){
+
+})
+
+//destroy
+app.delete("/", function(req, res){
+  tasks.pop(req.body.id)
+  res.json(tasks[req.params.id - 1])
+})
+
 
 app.listen(4000, function(){
   console.log("app listening on port 4000")
