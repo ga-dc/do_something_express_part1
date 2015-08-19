@@ -1,64 +1,59 @@
-function initRoutes(app, tasks) {
+function initRoutes(app, list1) {
+
 
 // ======= INDEX route
   app.get('/', function (req, res) {
 
-    res.render('index');
-
     // res.contentType('application/json');
-    // res.send(JSON.stringify(tasks));
+    // res.send(JSON.stringify(list1));
+
+    console.log("list1: " + list1.length);
+
+    var nextTask;
+    var nextParagraph = "";
+
+    for (i = 0; i < list1.length; i++) {
+      nextTask = list1[i];
+      nextParagraph = nextParagraph + "<p>" + list1[i].id + " | " + list1[i].body + " | " + list1[i].completed + "</p></br>";
+    }
+    // console.log("nextParagraph: " + nextParagraph);
+    res.render("index", {para: nextParagraph});
+  });
+
+
+  // ======= NEW route
+  app.get('/new', function (req, res) {
+
+    // Handlebars.registerPartial('taskForm', '{{name}}');
 
   });
+
 
   // ======= SHOW route
   app.get('/show/:id', function (req, res) {
 
-    var showTask = tasks[req.params.id - 1];
+    var showTask = list1[req.params.id - 1];
 
     res.contentType('application/json');
     res.send(JSON.stringify(showTask));
 
   });
 
+
   // ======= POST route
   app.post("/", function(req, res){
 
-    var id = req.body.id;
-    var name = req.body.name;
-    var completed = req.body.completed;
+    var id = 6;
+    var name = "buy coffee";
+    var completed = false;
 
-    res.render("POST id: " + id + " name: " + name + " completed: " + completed)
+    var newObj = {"id": id, "body": name, "completed": completed };
+
+    list1.push(newObj);
+
+    res.contentType('application/json');
+    res.send(JSON.stringify(list1));
   })
-
-  
-  // // songs#index
-  // app.get('/songs', function (req, res) {
-  //   res.send('GET index of Songs ');
-  // });
-  //
-  // // songs#new
-  // app.get('/songs/new', function (req, res) {
-  //   res.send('make new song ');
-  // });
-  //
-  // // songs#create
-  // app.post('/songs', function (req, res) {
-  //   res.send('POST to create a new song ');
-  // });
-  //
-  // // songs#edit
-  // app.get('/songs/edit/:id', function (req, res) {
-  //   res.send('GET selected song to edit: ' + req.params.id);
-  // });
-
-  // app.get('/about', function(req, res) {
-  //     res.render('about');
-  // });
-  //
-  // app.get('/task', function(req, res) {
-  //     res.render('task');
-  // });
-  //
 
 }
 
