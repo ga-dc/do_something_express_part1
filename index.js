@@ -4,21 +4,29 @@ var bodyParser = require("body-parser")
 app.use(bodyParser.json()) //handles json post requests
 app.use(bodyParser.urlencoded({ extended: true })) // handles form submissions
 var tasks = [
-  {id: 1, body: "task1", completed: true},
-  {id: 2, body: "task2", completed: false},
-  {id: 3, body: "task3", completed: false},
+  { id: 1,
+    body: "roto-root shower drain",
+    completed: true },
+  { id: 2,
+    body: "grease rear axle on the Biscayne",
+    completed: false},
+  { id: 3,
+    body: "replant flag at Sea of Tranquility",
+    completed: false},
 ]
 
-app.get("/tasks", function(req, res){
+app.get("/", function(req, res){
   res.json(tasks)
 })
 
 app.get("/tasks/:id", function(req, res){
-  res.send("hello " + req.params.name)
+  var id = parseInt(req.params.id) - 1;
+  res.json(tasks[id])
 })
 
 app.post("/tasks", function(req, res){
-  res.send("hello", {name: req.body.name})
+  tasks.push(req.body)
+  res.json(req.body)
 })
 
 app.listen(4000, function(){
