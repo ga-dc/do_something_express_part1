@@ -3,7 +3,7 @@ var app = express();
 var bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use("/app", express.static(path.join(__dirname + "/app")));
+
 
 var tasks = [
   {id: 1, body: "Do something!", completed: true},
@@ -13,11 +13,9 @@ var tasks = [
   {id: 5, body: "Do the right thing!", completed: true}
 ]
 
-var tasks_controller = require("/app/controllers")
-app.get("/", function(request, response){
-  response.sendFile(__dirname + "/app/views/index.html");
+app.get("/", function(req, res){
+  res.sendFile(__dirname + "/app/views/index.html");
 });
-
 
 app.listen(5678, function(){
   console.log("app listening on port 5678");
